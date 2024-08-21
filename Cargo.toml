@@ -1,0 +1,10 @@
+[package]
+name = "ser_gui"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serialport = "4.2"
+egui = "0.28.1" # or iced = "0.7" if you prefer using Iced
+eframe = "0.28.1" # eframe is the frame for egui
+regex = "1"
