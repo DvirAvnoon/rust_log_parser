@@ -1,2 +1,9 @@
 # rust_log_parser
-UART and offline generic log parser written in RUST 
+Generic UART and offline logger.
+- GUI
+- Supports filters.
+- Supports markers.
+
+TBD
+- Support for external extensions
+  
