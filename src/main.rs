@@ -28,21 +28,25 @@ impl SerialApp {
     
 }
 
-fn highlight_text(ui: &mut egui::Ui, text: &str, marker: &str) {
+fn highlight_text_old(ui: &mut egui::Ui, text: &str, marker: &str) {
     if marker.is_empty() {
         ui.label(text); // If the marker is empty, just display the text
         return;
     }
-    println!("Marker: {}", marker);
     let mut start = 0;
     while let Some(pos) = text[start..].find(marker) {
         let end = start + pos;
-        ui.label(&text[start..end]);
-        ui.label(
-            egui::RichText::new(marker)
-                .background_color(egui::Color32::YELLOW)
-                .monospace(),
-        );
+        let eol = text[start..].find('\n').unwrap_or_else(|| text.len());
+        ui.horizontal(|ui| {
+            ui.label(&text[start..end]); // Normal text
+            ui.label(
+                egui::RichText::new(marker)
+                    .background_color(egui::Color32::YELLOW)
+                    , // Highlighted marker
+            );
+            ui.label(&text[end + marker.len()..end + marker.len() + eol]); // Normal text
+        });
+
         start = end + marker.len();
     }
     if start < text.len() {
@@ -50,6 +54,34 @@ fn highlight_text(ui: &mut egui::Ui, text: &str, marker: &str) {
     }
 }
 
+fn highlight_text(ui: &mut egui::Ui, text: &str, marker: &str) {
+    if marker.is_empty() {
+        ui.label(egui::RichText::new(text)); // Display the entire text as RichText
+        return;
+    }
+
+    for line in text.lines() {
+        if let Some(pos) = line.find(marker) {
+            let start = &line[..pos]; // Text before the marker
+            let end = &line[pos + marker.len()..]; // Text after the marker
+
+            ui.with_layout(egui::Layout::left_to_right(egui::Align::TOP), |ui| {
+                ui.add(egui::Label::new(egui::RichText::new(start))); // Text before the marker
+                ui.add(
+                    egui::Label::new(
+                        egui::RichText::new(marker)
+                            .background_color(egui::Color32::YELLOW)
+                            .monospace(), // Highlighted marker
+                    )
+                    
+                );
+                ui.add(egui::Label::new(egui::RichText::new(end))); // Text after the marker
+            });
+        } else {
+            ui.label(egui::RichText::new(line)); // Print the line without highlighting if no marker found
+        }
+    }
+}
 
 
 
@@ -92,7 +124,7 @@ impl eframe::App for SerialApp {
                     ui.label(&self.log[start..]); // Remaining text
                 }
                 ui.separator(); // A separator line between serial log and file log
-
+                println!("self.marker.len() = {}", self.marker.len());
                 highlight_text(ui, &self.file_log, &self.marker);
 
                 start = 0;

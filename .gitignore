@@ -1,0 +1,94 @@
+target/*
+bundle*/
+.metadata/
+venv/
+.idea/
+.idea
+.vscode/
+CTCHTML
+rdr_common/flatbuffers/inc/*.h
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+*.pyc
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+.sc.project
+
+#rdr_app logger
+rdr_logger.txt
+.vscode/configurationCache.log
+.vscode/dryrun.log
+.vscode/targets.log
+rec/
+
+#flat buffer binary files
+cfg_bin/*
+tools/boot_files/*
+tools/bundle_out/*
+tools/tests/dsp_tests/rsl_result/*.log
+
+#ev_62 debug and build
+rdr_core/app/rdr_dsp_app/build_arbe_ev62_small_small_debug/
+
+
+tools/bundle_out/cfg_package.bin
+tools/bundle_out/cfg_package.bin
+tools/bundle_out/flash_bundle.bin
+tools/boot_files/flash_bundle.bin
+tools/tests/dsp_tests/rsl_result/ref.bin
+tools/tests/dsp_tests/rsl_tests/arbe-rosbag_008_3D_Short_2023-11-09-15-26-17_0_100m_120k_targets_4marziano.bin
+tools/tests/dsp_tests/rsl_tests/dsp_cfg_01-12-23_minus31_aggressive.json
+
+
+#pycache
+*.py_cache
+/tools/tests/dsp_tests/rsl_result/*.bin
+/tools/tests/dsp_tests/inject_tests/*.bin
+/tools/tests/dsp_tests/inject_tests/*.log
